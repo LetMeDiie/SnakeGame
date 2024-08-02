@@ -17,12 +17,19 @@ public class GameView extends JPanel implements Observer {
         this.gameData = gameData;
         this.gameObjectsViews = gameObjectsViews;
         this.gameOverDisplayed = false;
-        setupFrame();
+        setPreferredSize(new Dimension(
+                GameConstants.fieldWidth * GameConstants.CELL_SIZE,
+                GameConstants.fieldHeight * GameConstants.CELL_SIZE + GameConstants.PADDING
+        ));
     }
 
     @Override
     public void update() {
         repaint();
+    }
+
+    public void setFrame(JFrame frame) {
+        this.frame = frame;
     }
 
     @Override
@@ -37,17 +44,6 @@ public class GameView extends JPanel implements Observer {
         }
     }
 
-    private void setupFrame() {
-        frame = new JFrame("Snake Game");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        int panelWidth = GameConstants.fieldWidth * GameConstants.CELL_SIZE;
-        int panelHeight = GameConstants.fieldHeight * GameConstants.CELL_SIZE + GameConstants.PADDING;
-        setPreferredSize(new Dimension(panelWidth, panelHeight));
-        frame.add(this);
-        frame.pack();
-        frame.setVisible(true);
-        requestFocusInWindow();
-    }
 
     public void setGameOverDisplayed(boolean gameOverDisplayed) {
         this.gameOverDisplayed = gameOverDisplayed;
